@@ -871,5 +871,27 @@ export const schemas = {
       additionalProperties: false,
     },
   },
+  holderAttestationChallenge: {
+    body: {
+      type: 'object',
+      properties: {
+        holder_address: { type: 'string', pattern: '^G[A-Z2-7]{55}$' },
+      },
+      required: ['holder_address'],
+      additionalProperties: false,
+    },
+  },
+  holderAttestationVerify: {
+    body: {
+      type: 'object',
+      properties: {
+        challenge_id: { type: 'string', minLength: 1, pattern: '\\S' },
+        holder_address: { type: 'string', pattern: '^G[A-Z2-7]{55}$' },
+        signature: { type: 'string', minLength: 1, pattern: '\\S' },
+      },
+      required: ['challenge_id', 'holder_address', 'signature'],
+      additionalProperties: false,
+    },
+  },
 };
 export default validate;
